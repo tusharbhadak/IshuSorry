@@ -408,13 +408,13 @@
       border-radius: 12px;
       background: #fffdf8;
       box-shadow: 0 8px 18px rgba(70, 30, 40, .1);
-      transform: translateY(65px);
+      transform: translateY(145px);
       transition: transform .8s cubic-bezier(.2,.8,.2,1);
       overflow: hidden;
     }
 
     .envelope.opened .letter {
-      transform: translateY(-55px);
+      transform: translateY(-92px);
       z-index: 6;
     }
 
@@ -550,28 +550,22 @@
         <h2>Tap each one to reveal</h2>
 
         <div class="heart-list">
-          <div class="heart-item" id="heart1">
-            <button class="heart-btn" onclick="revealHeart(1)" aria-label="Reveal first message">
-              <span>1</span>
-            </button>
+          <div class="heart-item" id="heart1" onclick="revealHeart(1)" role="button" tabindex="0" aria-label="Reveal first message">
+            <div class="heart-btn" aria-hidden="true"><span>1</span></div>
             <div class="heart-message" id="message1">
               Tap the heart ❤️
             </div>
           </div>
 
-          <div class="heart-item" id="heart2">
-            <button class="heart-btn" onclick="revealHeart(2)" aria-label="Reveal second message">
-              <span>2</span>
-            </button>
+          <div class="heart-item" id="heart2" onclick="revealHeart(2)" role="button" tabindex="0" aria-label="Reveal second message">
+            <div class="heart-btn" aria-hidden="true"><span>2</span></div>
             <div class="heart-message" id="message2">
               Tap the heart ❤️
             </div>
           </div>
 
-          <div class="heart-item" id="heart3">
-            <button class="heart-btn" onclick="revealHeart(3)" aria-label="Reveal third message">
-              <span>3</span>
-            </button>
+          <div class="heart-item" id="heart3" onclick="revealHeart(3)" role="button" tabindex="0" aria-label="Reveal third message">
+            <div class="heart-btn" aria-hidden="true"><span>3</span></div>
             <div class="heart-message" id="message3">
               Tap the heart ❤️
             </div>
@@ -616,7 +610,7 @@
 
         <div class="continue-after-letter" id="finalArea">
           <div class="love">Always & Forever ❤️</div>
-          <div class="footer-note">❤️ Made with a lots of love from Tushu, just for Ishu 🥹</div>
+          <div class="footer-note">Made with a lot of love, just for Ishu 🥹</div>
         </div>
       </div>
     </section>
@@ -756,6 +750,16 @@
         ).onfinish = () => heart.remove();
       }
     }
+
+    document.querySelectorAll('.heart-item').forEach((item) => {
+      item.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          const number = Number(item.id.replace('heart', ''));
+          revealHeart(number);
+        }
+      });
+    });
 
     document.getElementById('envelope').addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
