@@ -408,14 +408,27 @@
       border-radius: 12px;
       background: #fffdf8;
       box-shadow: 0 8px 18px rgba(70, 30, 40, .1);
-      transform: translateY(145px);
-      transition: transform .8s cubic-bezier(.2,.8,.2,1);
+
+      /* Completely hidden until the envelope is opened */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(35px) scale(.96);
+      transition:
+        opacity .35s ease,
+        visibility 0s linear .35s,
+        transform .8s cubic-bezier(.2,.8,.2,1);
       overflow: hidden;
     }
 
     .envelope.opened .letter {
-      transform: translateY(-92px);
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-92px) scale(1);
       z-index: 6;
+      transition:
+        opacity .35s ease .45s,
+        visibility 0s linear 0s,
+        transform .8s cubic-bezier(.2,.8,.2,1) .45s;
     }
 
     .letter p {
